@@ -4,21 +4,18 @@ package glasgowmafia.godzilla.ctrl
 
 	import glasgowmafia.godzilla.sys.control.KeyHandlerSystem;
 	import glasgowmafia.godzilla.sys.control.UpdateCameraSystem;
-	import glasgowmafia.godzilla.sys.render.ViewpointBlitterSystem;
-
 	
-	public class BootstrapEmberCommand
+	public class CreateControllerSystemsCommand
 	{
 		private var _system:EntitySystem;
 
-		public function BootstrapEmberCommand(system:EntitySystem)
+		public function CreateControllerSystemsCommand(system:EntitySystem)
 		{
 			_system = system;
 		}
 		
 		public function execute():void
 		{
-			_system.addSystem(ViewpointBlitterSystem);
 			_system.addSystem(KeyHandlerSystem);
 			_system.addSystem(UpdateCameraSystem);
 		}

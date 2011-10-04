@@ -6,7 +6,6 @@ package glasgowmafia.godzilla.sys.control
 	import glasgowmafia.godzilla.Tick;
 	import glasgowmafia.godzilla.components.ControlComponent;
 	import glasgowmafia.godzilla.components.PositionComponent;
-	import glasgowmafia.godzilla.model.Camera;
 
 	import flash.display.DisplayObjectContainer;
 	import flash.display.Stage;
@@ -26,7 +25,7 @@ package glasgowmafia.godzilla.sys.control
 		private var _isRight:Boolean;
 		private var _isDown:Boolean;
 
-		public function KeyHandlerSystem(system:EntitySystem, root:DisplayObjectContainer, viewpoint:Camera, tick:Tick)
+		public function KeyHandlerSystem(system:EntitySystem, root:DisplayObjectContainer, tick:Tick)
 		{
 			_system = system;
 			_stage = root.stage;

@@ -2,15 +2,16 @@ package glasgowmafia.godzilla.model
 {
 	public class Camera
 	{
-		public var centerX:int = 400;
-		public var centerY:int = 300;
+		public var centerX:int;
+		public var centerY:int;
 		
-		public var x:Number = 0;
-		public var y:Number = 0;
-		public var angle:Number = 0;
+		public var maxDAngle:Number;
+		public var maxDPosition:Number;
 		
-		public var maxDAngle:Number = Math.PI / 180;
-		public var maxDPosition:Number = 5;
+		public var x:Number;
+		public var y:Number;
+		public var angle:Number;
+		
 		
 	}
 }

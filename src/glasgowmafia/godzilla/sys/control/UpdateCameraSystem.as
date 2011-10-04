@@ -13,7 +13,7 @@ package glasgowmafia.godzilla.sys.control
 	public class UpdateCameraSystem
 	{
 		private static const PI:Number = Math.PI;
-		private static const TWO_PI:Number = Math.PI;
+		private static const HALF_PI:Number = Math.PI * .5;
 		
 		private var _system:EntitySystem;
 		private var _camera:Camera;
@@ -44,20 +44,18 @@ package glasgowmafia.godzilla.sys.control
 			var node:ControlNode = _nodes.head as ControlNode;
 			var position:PositionComponent = node.position;
 
-			var dAngle:Number = _camera.angle - position.angle;
-			if (dAngle > PI)
-				dAngle -= TWO_PI;
+			var dAngle:Number = position.angle - _camera.angle;
+			if (dAngle > HALF_PI)
+				dAngle -= PI;
+			else if (dAngle < -HALF_PI)
+				dAngle += PI;
 			
-			dAngle *= dAngle;
 			if (dAngle > _camera.maxDAngle)
 				dAngle = _camera.maxDAngle;
 			else if (dAngle < -_camera.maxDAngle)
 				dAngle = -_camera.maxDAngle;
 			
 			var pt:Point = new Point(_camera.x - position.x, _camera.y - position.y);
-			
-			trace(_camera.x, _camera.y, position.x, position.y);
-			
 			if (pt.length > _camera.maxDPosition)
 				pt.normalize(_camera.maxDPosition);
 			

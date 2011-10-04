@@ -62,8 +62,8 @@ package glasgowmafia.godzilla.ctrl
 		private function generateControl():ControlComponent
 		{
 			var control:ControlComponent = new ControlComponent();
-			control.velocity = 3;
-			control.dAngle = Math.PI / 180;
+			control.velocity = 8;
+			control.dAngle = 2 * Math.PI / 180;
 			
 			return control;
 		}
