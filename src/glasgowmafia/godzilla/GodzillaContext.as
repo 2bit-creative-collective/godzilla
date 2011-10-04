@@ -1,6 +1,12 @@
 package glasgowmafia.godzilla
 {
-	import glasgowmafia.godzilla.ctrl.BootstrapWorldCommand;
+	import ember.core.EntitySystem;
+
+	import glasgowmafia.godzilla.ctrl.BootstrapEmber;
+	import glasgowmafia.godzilla.ctrl.DefineWorldCommand;
+	import glasgowmafia.godzilla.ctrl.GenerateRandomWorldCommand;
+	import glasgowmafia.godzilla.view.RenderFactory;
+
 	import org.robotlegs.mvcs.Context;
 
 	import flash.display.DisplayObjectContainer;
@@ -11,7 +17,14 @@ package glasgowmafia.godzilla
 		{
 			super(root, true);
 			
-			commandMap.execute(BootstrapWorldCommand);
+			injector.mapSingleton(Tick);
+			injector.mapSingleton(EntitySystem);
+			injector.mapSingleton(RenderFactory);
+			
+			commandMap.execute(BootstrapEmber);
+			
+			commandMap.execute(GenerateRandomWorldCommand);
+			commandMap.execute(DefineWorldCommand);
 		}
 		
 		

@@ -4,6 +4,7 @@
 
 	import flash.display.Sprite;
 
+	[SWF(backgroundColor="#FFFFFF", frameRate="31", width="800", height="600")]
 	public class Main extends Sprite
 	{
 		private var context:GodzillaContext;
