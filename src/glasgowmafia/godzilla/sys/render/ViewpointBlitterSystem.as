@@ -75,13 +75,15 @@ package glasgowmafia.godzilla.sys.render
 			const dx:Number = _camera.x;
 			const dy:Number = _camera.y;
 			
+			var px:Number, py:Number;
+			
 			for (var node:RenderNode = _nodes.head; node; node = node.next)
 			{
 				var render:RenderComponent = node.render;
 				var position:PositionComponent = node.position;
 				
-				var px:Number = position.x;
-				var py:Number = position.y;
+				px = position.x;
+				py = position.y;
 				
 				if (position.angle != 0)
 				{
@@ -102,10 +104,9 @@ package glasgowmafia.godzilla.sys.render
 			_interim.unlock();
 			
 			_matrix.identity();
-//			_matrix.translate(-1000, -1000);
-//			_matrix.rotate(-_camera.angle);
-//			_matrix.translate(1000, 1000);
-			_matrix.translate(_camera.centerX - dx, _camera.centerY - dy);
+			_matrix.translate(-dx, -dy);
+			_matrix.rotate(_camera.angle);
+			_matrix.translate(_camera.centerX, _camera.centerY);
 			
 			_data.draw(_interim, _matrix, null, null, null, true);
 			_data.unlock();
