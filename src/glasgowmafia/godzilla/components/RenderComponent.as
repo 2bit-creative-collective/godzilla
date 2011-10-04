@@ -8,8 +8,8 @@ package glasgowmafia.godzilla.components
 		
 		public var data:BitmapData;
 		public var rect:Rectangle;
-		public var x:int;
-		public var y:int;
+		public var offsetX:int = 0;
+		public var offsetY:int = 0;
 		
 	}
 }

@@ -1,5 +1,6 @@
 package glasgowmafia.godzilla.sys.render
 {
+	import glasgowmafia.godzilla.components.PositionComponent;
 	import glasgowmafia.godzilla.components.RenderComponent;
 	
 	public class RenderNode
@@ -9,6 +10,6 @@ package glasgowmafia.godzilla.sys.render
 		public var next:RenderNode;
 		
 		public var render:RenderComponent;
-		
+		public var position:PositionComponent;
 	}
 }

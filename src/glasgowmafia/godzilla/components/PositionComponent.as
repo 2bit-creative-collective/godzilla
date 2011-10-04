@@ -1,6 +1,6 @@
-package glasgowmafia.godzilla.model
+package glasgowmafia.godzilla.components
 {
-	public class Viewpoint
+	public class PositionComponent
 	{
 		
 		public var x:Number = 0;

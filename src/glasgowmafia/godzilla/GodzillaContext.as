@@ -5,11 +5,10 @@ package glasgowmafia.godzilla
 
 	import ember.core.EntitySystem;
 
-	import glasgowmafia.godzilla.ctrl.BootstrapEmber;
-	import glasgowmafia.godzilla.ctrl.CreateDummyControlEntityCommand;
+	import glasgowmafia.godzilla.ctrl.BootstrapEmberCommand;
+	import glasgowmafia.godzilla.ctrl.CreateDummyGodzillaCommand;
 	import glasgowmafia.godzilla.ctrl.DefineRandomWorldCommand;
-	import glasgowmafia.godzilla.model.Viewpoint;
-	import glasgowmafia.godzilla.sys.render.RenderFactory;
+	import glasgowmafia.godzilla.model.Camera;
 
 	import org.robotlegs.mvcs.Context;
 
@@ -24,15 +23,14 @@ package glasgowmafia.godzilla
 			injector.mapSingleton(Random);
 			injector.mapSingleton(RandomColors);
 			
-			injector.mapSingleton(Viewpoint);
+			injector.mapSingleton(Camera);
 			injector.mapSingleton(Tick);
 			injector.mapSingleton(EntitySystem);
-			injector.mapValue(RenderFactory, new RenderFactory(40));
 			
-			commandMap.execute(BootstrapEmber);
+			commandMap.execute(BootstrapEmberCommand);
 			
 			commandMap.execute(DefineRandomWorldCommand);
-			commandMap.execute(CreateDummyControlEntityCommand);
+			commandMap.execute(CreateDummyGodzillaCommand);
 		}
 		
 		
