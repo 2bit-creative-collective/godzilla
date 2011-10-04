@@ -1,30 +1,28 @@
 package glasgowmafia.godzilla.ctrl
 {
+	import alecmce.random.RandomColors;
 	import ember.core.Entity;
 	import ember.core.EntitySystem;
+	import glasgowmafia.godzilla.sys.render.RenderFactory;
 
-	import glasgowmafia.godzilla.model.World;
-	import glasgowmafia.godzilla.model.WorldTile;
-	import glasgowmafia.godzilla.view.RenderFactory;
-	
-	public class DefineWorldCommand
-	
+	public class DefineRandomWorldCommand
 	{
+		
 		private var _system:EntitySystem;
-		private var _world:World;
 		private var _factory:RenderFactory;
+		private var _colors:RandomColors;
 
-		public function DefineWorldCommand(system:EntitySystem, world:World, factory:RenderFactory)
+		public function DefineRandomWorldCommand(system:EntitySystem, factory:RenderFactory, colors:RandomColors)
 		{
 			_system = system;
-			_world = world;
 			_factory = factory;
+			_colors = colors;
 		}
 
 		public function execute():void
 		{
-			var columns:uint = _world.columns;
-			var rows:uint = _world.rows;
+			var columns:uint = 10;
+			var rows:uint = 10;
 			
 			for (var x:int = 0; x < columns; x++)
 			{
@@ -35,10 +33,10 @@ package glasgowmafia.godzilla.ctrl
 
 		private function createEntity(x:int, y:int):void
 		{
-			var tile:WorldTile = _world.get(x, y);
+			var color:uint = _colors.nextColor();
 			var entity:Entity = _system.createEntity();
 			
-			entity.addComponent(_factory.generateRender(x, y, tile));
+			entity.addComponent(_factory.generateRender(x, y, color));
 		}
 		
 		

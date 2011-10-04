@@ -1,7 +1,6 @@
-package glasgowmafia.godzilla.sys.render
+package glasgowmafia.godzilla.components
 {
 	import flash.display.BitmapData;
-	import flash.geom.Point;
 	import flash.geom.Rectangle;
 	
 	public class RenderComponent
@@ -9,8 +8,8 @@ package glasgowmafia.godzilla.sys.render
 		
 		public var data:BitmapData;
 		public var rect:Rectangle;
-		
-		public var position:Point;
+		public var x:int;
+		public var y:int;
 		
 	}
 }

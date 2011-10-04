@@ -1,9 +1,9 @@
 package glasgowmafia.godzilla.ctrl
 {
-	import glasgowmafia.godzilla.sys.render.SimpleBlitterRenderSystem;
 	import ember.core.EntitySystem;
-
+	import glasgowmafia.godzilla.sys.render.SimpleBlitterRenderSystem;
 	import org.robotlegs.mvcs.Command;
+
 	
 	public class BootstrapEmber extends Command
 	{

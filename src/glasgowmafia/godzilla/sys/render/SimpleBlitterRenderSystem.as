@@ -4,48 +4,52 @@ package glasgowmafia.godzilla.sys.render
 	import ember.core.Nodes;
 
 	import glasgowmafia.godzilla.Tick;
+	import glasgowmafia.godzilla.components.RenderComponent;
 
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
 	import flash.display.DisplayObjectContainer;
 	import flash.geom.Point;
 
+
+
 	public class SimpleBlitterRenderSystem
 	{
 		
-		[Inject]
-		public var system:EntitySystem;
-		
-		[Inject]
-		public var view:DisplayObjectContainer;
-		
-		[Inject]
-		public var tick:Tick;
+		private var _system:EntitySystem;
+		private var _root:DisplayObjectContainer;
+		private var _tick:Tick;
 		
 		private var _data:BitmapData;
-		
-		private var _dest:Point;
-		
-		private var _nodes:Nodes;
 		private var _bitmap:Bitmap;
+		private var _dest:Point;
 
+		private var _nodes:Nodes;
+
+		public function SimpleBlitterRenderSystem(system:EntitySystem, root:DisplayObjectContainer, tick:Tick)
+		{
+			_system = system;
+			_root = root;
+			_tick = tick;
+		}
+		
 		public function onRegister():void
 		{
 			_data = new BitmapData(800, 600, true, 0xFFFFFFFF);
 			_dest = new Point();
 			_bitmap = new Bitmap(_data);
-			view.addChild(_bitmap);
+			_root.addChild(_bitmap);
 			
-			_nodes = system.getNodes(RenderNode);
+			_nodes = _system.getNodes(RenderNode);
 			
-			tick.add(iterate);
+			_tick.add(iterate);
 		}
 		
 		public function onRemove():void
 		{
-			tick.remove(iterate);
+			_tick.remove(iterate);
 			
-			view.removeChild(_bitmap);
+			_root.removeChild(_bitmap);
 			_bitmap = null;
 			_dest = null;
 			
@@ -62,8 +66,8 @@ package glasgowmafia.godzilla.sys.render
 			{
 				var render:RenderComponent = node.render;
 				
-				_dest.x = render.position.x;
-				_dest.y = render.position.y;
+				_dest.x = render.x;
+				_dest.y = render.y;
 				
 				_data.copyPixels(render.data, render.rect, _dest);
 			}

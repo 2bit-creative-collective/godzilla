@@ -1,5 +1,7 @@
 package glasgowmafia.godzilla.sys.render
 {
+	import glasgowmafia.godzilla.components.RenderComponent;
+	
 	public class RenderNode
 	{
 		
