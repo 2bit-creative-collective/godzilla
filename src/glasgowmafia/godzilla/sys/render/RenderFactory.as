@@ -9,7 +9,7 @@ package glasgowmafia.godzilla.sys.render
 	{
 
 		private var _size:uint;
-
+		
 		public function RenderFactory(size:uint)
 		{
 			_size = size;

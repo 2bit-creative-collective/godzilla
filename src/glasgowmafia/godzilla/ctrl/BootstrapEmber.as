@@ -1,7 +1,10 @@
 package glasgowmafia.godzilla.ctrl
 {
 	import ember.core.EntitySystem;
+
+	import glasgowmafia.godzilla.sys.control.ControlSystem;
 	import glasgowmafia.godzilla.sys.render.SimpleBlitterRenderSystem;
+
 	import org.robotlegs.mvcs.Command;
 
 	
@@ -17,6 +20,7 @@ package glasgowmafia.godzilla.ctrl
 		override public function execute():void
 		{
 			_system.addSystem(SimpleBlitterRenderSystem);
+			_system.addSystem(ControlSystem);
 		}
 		
 	}

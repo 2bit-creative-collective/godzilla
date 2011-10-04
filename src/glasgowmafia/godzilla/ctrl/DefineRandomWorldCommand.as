@@ -21,8 +21,8 @@ package glasgowmafia.godzilla.ctrl
 
 		public function execute():void
 		{
-			var columns:uint = 10;
-			var rows:uint = 10;
+			var columns:uint = 50;
+			var rows:uint = 50;
 			
 			for (var x:int = 0; x < columns; x++)
 			{

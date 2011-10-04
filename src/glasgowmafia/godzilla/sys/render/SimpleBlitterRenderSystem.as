@@ -5,19 +5,19 @@ package glasgowmafia.godzilla.sys.render
 
 	import glasgowmafia.godzilla.Tick;
 	import glasgowmafia.godzilla.components.RenderComponent;
+	import glasgowmafia.godzilla.model.Viewpoint;
 
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
 	import flash.display.DisplayObjectContainer;
 	import flash.geom.Point;
-
-
-
+	
 	public class SimpleBlitterRenderSystem
 	{
 		
 		private var _system:EntitySystem;
 		private var _root:DisplayObjectContainer;
+		private var _viewpoint:Viewpoint;
 		private var _tick:Tick;
 		
 		private var _data:BitmapData;
@@ -26,10 +26,11 @@ package glasgowmafia.godzilla.sys.render
 
 		private var _nodes:Nodes;
 
-		public function SimpleBlitterRenderSystem(system:EntitySystem, root:DisplayObjectContainer, tick:Tick)
+		public function SimpleBlitterRenderSystem(system:EntitySystem, root:DisplayObjectContainer, viewpoint:Viewpoint, tick:Tick)
 		{
 			_system = system;
 			_root = root;
+			_viewpoint = viewpoint;
 			_tick = tick;
 		}
 		
@@ -61,13 +62,16 @@ package glasgowmafia.godzilla.sys.render
 		{
 			_data.lock();
 			_data.fillRect(_data.rect, 0);
+
+			var dx:Number = _viewpoint.dx;
+			var dy:Number = _viewpoint.dy;
 			
 			for (var node:RenderNode = _nodes.head; node; node = node.next)
 			{
 				var render:RenderComponent = node.render;
 				
-				_dest.x = render.x;
-				_dest.y = render.y;
+				_dest.x = dx + render.x;
+				_dest.y = dy + render.y;
 				
 				_data.copyPixels(render.data, render.rect, _dest);
 			}
