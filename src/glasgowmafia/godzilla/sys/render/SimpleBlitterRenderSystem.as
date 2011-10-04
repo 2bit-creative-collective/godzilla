@@ -63,8 +63,8 @@ package glasgowmafia.godzilla.sys.render
 			_data.lock();
 			_data.fillRect(_data.rect, 0);
 
-			var dx:Number = _viewpoint.dx;
-			var dy:Number = _viewpoint.dy;
+			var dx:Number = _viewpoint.x;
+			var dy:Number = _viewpoint.y;
 			
 			for (var node:RenderNode = _nodes.head; node; node = node.next)
 			{

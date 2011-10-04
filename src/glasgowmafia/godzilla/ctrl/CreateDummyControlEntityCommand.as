@@ -19,8 +19,8 @@ package glasgowmafia.godzilla.ctrl
 			var entity:Entity = _system.createEntity();
 			
 			var control:ControlComponent = new ControlComponent();
-			control.dx = 3;
-			control.dy = 3;
+			control.velocity = 3;
+			control.dAngle = Math.PI / 180;
 			
 			entity.addComponent(control);
 		}

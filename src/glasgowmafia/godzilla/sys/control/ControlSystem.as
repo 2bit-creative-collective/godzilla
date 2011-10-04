@@ -87,16 +87,25 @@ package glasgowmafia.godzilla.sys.control
 				var control:ControlComponent = node.control;
 				
 				if (_isLeft)
-					_viewpoint.dx += control.dx;
+					_viewpoint.angle -= control.dAngle;
 				
 				if (_isRight)
-					_viewpoint.dx -= control.dx;
+					_viewpoint.angle += control.dAngle;
 					
+				if (_isUp == _isDown)
+					return;
+				
 				if (_isUp)
-					_viewpoint.dy += control.dy;
+				{
+					_viewpoint.x += Math.cos(_viewpoint.angle) * control.velocity;
+					_viewpoint.y -= Math.sin(_viewpoint.angle) * control.velocity;
+				}
 					
 				if (_isDown)
-					_viewpoint.dy -= control.dy;
+				{
+					_viewpoint.x -= Math.cos(_viewpoint.angle) * control.velocity;
+					_viewpoint.y += Math.sin(_viewpoint.angle) * control.velocity;
+				}
 			}
 		}
 
