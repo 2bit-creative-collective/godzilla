@@ -1,22 +1,27 @@
 package glasgowmafia.godzilla.ctrl
 {
-	import alecmce.random.RandomColors;
+	import alecmce.random.Random;
+
 	import ember.core.Entity;
 	import ember.core.EntitySystem;
-	import glasgowmafia.godzilla.sys.render.RenderFactory;
+
+	import glasgowmafia.godzilla.components.PhysicalComponent;
+	import glasgowmafia.godzilla.components.PositionComponent;
+	import glasgowmafia.godzilla.components.RenderComponent;
+
+	import flash.display.BitmapData;
 
 	public class DefineRandomWorldCommand
 	{
+		private static const SIZE:int = 40;
 		
 		private var _system:EntitySystem;
-		private var _factory:RenderFactory;
-		private var _colors:RandomColors;
+		private var _random:Random;
 
-		public function DefineRandomWorldCommand(system:EntitySystem, factory:RenderFactory, colors:RandomColors)
+		public function DefineRandomWorldCommand(system:EntitySystem, random:Random)
 		{
 			_system = system;
-			_factory = factory;
-			_colors = colors;
+			_random = random;
 		}
 
 		public function execute():void
@@ -27,16 +32,54 @@ package glasgowmafia.godzilla.ctrl
 			for (var x:int = 0; x < columns; x++)
 			{
 				for (var y:int = 0; y < rows; y++)
+				{
 					createEntity(x, y);
+				}
 			}
 		}
 
 		private function createEntity(x:int, y:int):void
 		{
-			var color:uint = _colors.nextColor();
 			var entity:Entity = _system.createEntity();
 			
-			entity.addComponent(_factory.generateRender(x, y, color));
+			var isTarget:Boolean = _random.nextBoolean(.05);
+			if (isTarget)
+			{
+				var physical:PhysicalComponent = generatePhysical(x, y);
+				entity.addComponent(physical);
+			}
+			
+			entity.addComponent(generateRender(x, y, isTarget ? 0xFF0000 : 0));
+			entity.addComponent(generatePosition(x, y));
+		}
+
+		private function generatePhysical(x:int, y:int):PhysicalComponent
+		{
+			var physical:PhysicalComponent = new PhysicalComponent();
+			
+			return physical;
+		}
+
+		private function generateRender(x:int, y:int, color:int = 0):RenderComponent
+		{
+			color ||= (x + y) % 2 ? 0xCCCCCC : 0x999999;
+			
+			var data:BitmapData = new BitmapData(SIZE, SIZE, false, color);
+			
+			var render:RenderComponent = new RenderComponent();
+			render.data = data;
+			render.rect = data.rect;
+			
+			return render;
+		}
+		
+		private function generatePosition(x:int, y:int):PositionComponent
+		{
+			var position : * = new PositionComponent();
+			position.x = x * SIZE;
+			position.y = y * SIZE;
+			
+			return position;
 		}
 		
 		

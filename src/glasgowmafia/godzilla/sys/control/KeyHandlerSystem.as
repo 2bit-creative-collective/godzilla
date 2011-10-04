@@ -5,18 +5,17 @@ package glasgowmafia.godzilla.sys.control
 
 	import glasgowmafia.godzilla.Tick;
 	import glasgowmafia.godzilla.components.ControlComponent;
-	import glasgowmafia.godzilla.model.Viewpoint;
+	import glasgowmafia.godzilla.components.PositionComponent;
 
 	import flash.display.DisplayObjectContainer;
 	import flash.display.Stage;
 	import flash.events.KeyboardEvent;
 	
-	public class ControlSystem
+	public class KeyHandlerSystem
 	{
 
 		private var _system:EntitySystem;
 		private var _stage:Stage;
-		private var _viewpoint:Viewpoint;
 
 		private var _nodes:Nodes;
 		private var _tick:Tick;
@@ -26,11 +25,10 @@ package glasgowmafia.godzilla.sys.control
 		private var _isRight:Boolean;
 		private var _isDown:Boolean;
 
-		public function ControlSystem(system:EntitySystem, root:DisplayObjectContainer, viewpoint:Viewpoint, tick:Tick)
+		public function KeyHandlerSystem(system:EntitySystem, root:DisplayObjectContainer, tick:Tick)
 		{
 			_system = system;
 			_stage = root.stage;
-			_viewpoint = viewpoint;
 			_tick = tick;
 		}
 		
@@ -82,24 +80,42 @@ package glasgowmafia.godzilla.sys.control
 		
 		private function iterate():void
 		{
-			for (var node:ControlNode = _nodes.head; node; node = node.next)
+			var node:ControlNode = _nodes.head as ControlNode;
+			
+			var position:PositionComponent = node.position;
+			var control:ControlComponent = node.control;
+				
+			var angle:Number = position.angle;
+			
+			if (_isLeft != _isRight)
 			{
-				var control:ControlComponent = node.control;
-				
 				if (_isLeft)
-					_viewpoint.dx += control.dx;
-				
+					angle += control.dAngle;
+			
 				if (_isRight)
-					_viewpoint.dx -= control.dx;
-					
-				if (_isUp)
-					_viewpoint.dy += control.dy;
-					
-				if (_isDown)
-					_viewpoint.dy -= control.dy;
+					angle -= control.dAngle;
+			
+				position.angle = angle;
+				position.changed = true;
+			}
+			
+			if (_isUp == _isDown)
+				return;
+			
+			if (_isUp)
+			{
+				position.x -= Math.sin(angle) * control.velocity;
+				position.y -= Math.cos(angle) * control.velocity;
+				position.changed = true;
+			}
+			
+			if (_isDown)
+			{
+				position.x += Math.sin(angle) * control.velocity;
+				position.y += Math.cos(angle) * control.velocity;
+				position.changed = true;
 			}
 		}
-
 		
 	}
 }

@@ -21,6 +21,11 @@ package alecmce.random
 			_seed = seed;
 			_current = seed;
 		}
+		
+		public function nextBoolean(chance:Number = 0.5):Boolean
+		{
+			return next() < chance * 2147483647;
+		}
 
 		public function nextInt(range:uint = 0):uint
 		{
