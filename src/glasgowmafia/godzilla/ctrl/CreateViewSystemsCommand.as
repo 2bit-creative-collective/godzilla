@@ -3,7 +3,7 @@ package glasgowmafia.godzilla.ctrl
 	import ember.core.EntitySystem;
 
 	import glasgowmafia.godzilla.model.Camera;
-	import glasgowmafia.godzilla.sys.render.ViewpointBlitterSystem;
+	import glasgowmafia.godzilla.sys.render.CameraDisplayListSystem;
 
 	import org.robotlegs.core.IInjector;
 	
@@ -22,7 +22,9 @@ package glasgowmafia.godzilla.ctrl
 		public function execute():void
 		{
 			_injector.mapValue(Camera, generateCamera());
-			_system.addSystem(ViewpointBlitterSystem);
+			
+//			_system.addSystem(CameraBlitterSystem);
+			_system.addSystem(CameraDisplayListSystem);
 		}
 
 		private function generateCamera():Camera

@@ -96,6 +96,7 @@ package glasgowmafia.godzilla.sys.control
 					angle -= control.dAngle;
 			
 				position.angle = angle;
+				position.moved = true;
 			}
 			
 			if (_isUp == _isDown)
@@ -105,12 +106,14 @@ package glasgowmafia.godzilla.sys.control
 			{
 				position.x -= Math.sin(angle) * control.velocity;
 				position.y -= Math.cos(angle) * control.velocity;
+				position.moved = true;
 			}
 			
 			if (_isDown)
 			{
 				position.x += Math.sin(angle) * control.velocity;
 				position.y += Math.cos(angle) * control.velocity;
+				position.moved = true;
 			}
 		}
 		

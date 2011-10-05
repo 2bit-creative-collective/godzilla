@@ -11,5 +11,6 @@ package glasgowmafia.godzilla.sys.render
 		
 		public var render:RenderComponent;
 		public var position:PositionComponent;
+		
 	}
 }

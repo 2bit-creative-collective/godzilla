@@ -14,7 +14,7 @@ package glasgowmafia.godzilla.sys.render
 	import flash.geom.Matrix;
 	import flash.geom.Point;
 	
-	public class ViewpointBlitterSystem
+	public class CameraBlitterSystem
 	{
 		private var _system:EntitySystem;
 		private var _root:DisplayObjectContainer;
@@ -29,7 +29,7 @@ package glasgowmafia.godzilla.sys.render
 
 		private var _nodes:Nodes;
 
-		public function ViewpointBlitterSystem(system:EntitySystem, root:DisplayObjectContainer, camera:Camera, tick:Tick)
+		public function CameraBlitterSystem(system:EntitySystem, root:DisplayObjectContainer, camera:Camera, tick:Tick)
 		{
 			_system = system;
 			_root = root;
@@ -72,15 +72,17 @@ package glasgowmafia.godzilla.sys.render
 			_interim.lock();
 			_interim.fillRect(_data.rect, 0);
 
-			const dx:Number = _camera.x;
-			const dy:Number = _camera.y;
-			
 			var px:Number, py:Number;
 			
 			for (var node:RenderNode = _nodes.head; node; node = node.next)
 			{
 				var render:RenderComponent = node.render;
 				var position:PositionComponent = node.position;
+				
+				if (!position.moved)
+					continue;
+				
+				position.moved = false;
 				
 				px = position.x;
 				py = position.y;
@@ -104,7 +106,7 @@ package glasgowmafia.godzilla.sys.render
 			_interim.unlock();
 			
 			_matrix.identity();
-			_matrix.translate(-dx, -dy);
+			_matrix.translate(-_camera.x, -_camera.y);
 			_matrix.rotate(_camera.angle);
 			_matrix.translate(_camera.centerX, _camera.centerY);
 			
