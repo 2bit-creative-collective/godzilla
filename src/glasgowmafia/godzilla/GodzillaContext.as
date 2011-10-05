@@ -1,13 +1,12 @@
 package glasgowmafia.godzilla
 {
-	import glasgowmafia.godzilla.ctrl.CreateViewSystemsCommand;
 	import alecmce.random.Random;
-	import alecmce.random.RandomColors;
 
 	import ember.core.EntitySystem;
 
 	import glasgowmafia.godzilla.ctrl.CreateControllerSystemsCommand;
 	import glasgowmafia.godzilla.ctrl.CreateDummyGodzillaCommand;
+	import glasgowmafia.godzilla.ctrl.CreateViewSystemsCommand;
 	import glasgowmafia.godzilla.ctrl.DefineRandomWorldCommand;
 
 	import org.robotlegs.mvcs.Context;
@@ -20,8 +19,7 @@ package glasgowmafia.godzilla
 		{
 			super(root, true);
 			
-			injector.mapSingleton(Random);
-			injector.mapSingleton(RandomColors);
+			injector.mapValue(Random, new Random(4));
 			
 			injector.mapSingleton(Tick);
 			injector.mapSingleton(EntitySystem);

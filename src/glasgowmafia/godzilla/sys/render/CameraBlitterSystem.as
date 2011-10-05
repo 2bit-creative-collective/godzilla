@@ -72,20 +72,13 @@ package glasgowmafia.godzilla.sys.render
 			_interim.lock();
 			_interim.fillRect(_data.rect, 0);
 
-			var px:Number, py:Number;
-			
 			for (var node:RenderNode = _nodes.head; node; node = node.next)
 			{
 				var render:RenderComponent = node.render;
 				var position:PositionComponent = node.position;
 				
-				if (!position.moved)
-					continue;
-				
-				position.moved = false;
-				
-				px = position.x;
-				py = position.y;
+				var px:Number = position.x;
+				var py:Number = position.y;
 				
 				if (position.angle != 0)
 				{

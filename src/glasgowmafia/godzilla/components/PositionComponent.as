@@ -8,7 +8,5 @@ package glasgowmafia.godzilla.components
 		
 		public var angle:Number = 0;
 		
-		public var moved:Boolean;
-		
 	}
 }

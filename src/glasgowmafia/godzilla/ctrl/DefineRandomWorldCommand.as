@@ -1,12 +1,13 @@
 package glasgowmafia.godzilla.ctrl
 {
-	import alecmce.random.RandomColors;
+	import alecmce.random.Random;
 
 	import ember.core.Entity;
 	import ember.core.EntitySystem;
 
 	import glasgowmafia.godzilla.components.PositionComponent;
 	import glasgowmafia.godzilla.components.RenderComponent;
+	import glasgowmafia.godzilla.components.TargetComponent;
 
 	import flash.display.BitmapData;
 
@@ -15,12 +16,12 @@ package glasgowmafia.godzilla.ctrl
 		private static const SIZE:int = 40;
 		
 		private var _system:EntitySystem;
-		private var _colors:RandomColors;
+		private var _random:Random;
 
-		public function DefineRandomWorldCommand(system:EntitySystem, colors:RandomColors)
+		public function DefineRandomWorldCommand(system:EntitySystem, random:Random)
 		{
 			_system = system;
-			_colors = colors;
+			_random = random;
 		}
 
 		public function execute():void
@@ -37,15 +38,26 @@ package glasgowmafia.godzilla.ctrl
 
 		private function createEntity(x:int, y:int):void
 		{
-			var color:uint = _colors.nextColor();
 			var entity:Entity = _system.createEntity();
 			
-			entity.addComponent(generateRender(x, y, color));
+			var isTarget:Boolean = _random.nextBoolean(.05);
+			if (isTarget)
+				entity.addComponent(generateTarget(x, y));
+			
+			entity.addComponent(generateRender(x, y, isTarget ? 0xFF0000 : 0));
 			entity.addComponent(generatePosition(x, y));
 		}
 
-		private function generateRender(x:int, y:int, color:uint):RenderComponent
+		private function generateTarget(x:int, y:int):TargetComponent
 		{
+			var target:TargetComponent = new TargetComponent();
+			return target;
+		}
+
+		private function generateRender(x:int, y:int, color:int = 0):RenderComponent
+		{
+			color ||= (x + y) % 2 ? 0xCCCCCC : 0x999999;
+			
 			var data:BitmapData = new BitmapData(SIZE, SIZE, false, color);
 			
 			var render:RenderComponent = new RenderComponent();
