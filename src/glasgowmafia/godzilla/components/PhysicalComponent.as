@@ -1,6 +1,9 @@
 package glasgowmafia.godzilla.components
 {
-	public class TargetComponent
+	
+	public class PhysicalComponent
 	{
+		
+		
 	}
 }

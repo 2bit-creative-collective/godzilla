@@ -12,7 +12,6 @@ package glasgowmafia.godzilla.sys.render
 	import flash.display.DisplayObjectContainer;
 	import flash.display.Sprite;
 	import flash.geom.Matrix;
-	import flash.utils.Dictionary;
 	
 	public class CameraDisplayListSystem
 	{
@@ -21,12 +20,9 @@ package glasgowmafia.godzilla.sys.render
 		private var _camera:Camera;
 		private var _tick:Tick;
 		
-		private var _layer:Sprite;
-		private var _bitmaps:Dictionary;
-		
-		private var _sprite:Sprite;
-		private var _nodes:Nodes;
 		private var _matrix:Matrix;
+		private var _layer:Sprite;
+		private var _nodes:Nodes;
 
 		public function CameraDisplayListSystem(system:EntitySystem, root:DisplayObjectContainer, camera:Camera, tick:Tick)
 		{
@@ -36,14 +32,12 @@ package glasgowmafia.godzilla.sys.render
 			_camera = camera;
 			
 			_matrix = new Matrix();
-			_root.addChild(_layer = new Sprite());
-			_bitmaps = new Dictionary();
 		}
 		
 		public function onRegister():void
 		{
-			_sprite = new Sprite();
-			_root.addChild(_sprite);
+			_layer = new Sprite();
+			_root.addChild(_layer);
 			
 			_nodes = _system.getNodes(RenderNode);
 			_nodes.nodeAdded.add(addNode);
@@ -56,16 +50,19 @@ package glasgowmafia.godzilla.sys.render
 		public function onRemove():void
 		{
 			_tick.remove(iterate);
-			_root.removeChild(_sprite);
+			_root.removeChild(_layer);
 		}
 		
 		private function iterate():void
 		{
 			for (var node:RenderNode = _nodes.head as RenderNode; node; node = node.next)
 			{
-				var render:RenderComponent = node.render;
 				var position:PositionComponent = node.position;
-				var bitmap:Bitmap = _bitmaps[node];
+				if (!position.changed)
+					continue;
+				
+				var render:RenderComponent = node.render;
+				var bitmap:Bitmap = node.bitmap;
 				
 				_matrix.identity();
 				_matrix.translate(render.offsetX, render.offsetY);
@@ -94,15 +91,17 @@ package glasgowmafia.godzilla.sys.render
 			var bitmap:Bitmap = new Bitmap();
 			bitmap.bitmapData = node.render.data;
 			
-			_bitmaps[node] = bitmap;
+			node.bitmap = bitmap;
+			node.position.changed = true;
 			_layer.addChild(bitmap);
 		}
 
 		private function removeNode(node:RenderNode):void
 		{
-			var bitmap:Bitmap = _bitmaps[node];
+			var bitmap:Bitmap = node.bitmap;
 			_layer.removeChild(bitmap);
-			delete _bitmaps[node];
+			
+			node.bitmap = null;
 		}
 		
 	}

@@ -8,7 +8,10 @@ package glasgowmafia.godzilla.sys.control
 		public var prev:ControlNode;
 		public var next:ControlNode;
 		
+		[Ember(definesNode)]
 		public var control:ControlComponent;
+		
+		[Ember(definesNode)]
 		public var position:PositionComponent;
 	}
 }

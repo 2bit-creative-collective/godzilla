@@ -3,6 +3,7 @@ package glasgowmafia.godzilla.ctrl
 	import ember.core.Entity;
 	import ember.core.EntitySystem;
 
+	import glasgowmafia.godzilla.Names;
 	import glasgowmafia.godzilla.components.ControlComponent;
 	import glasgowmafia.godzilla.components.PositionComponent;
 	import glasgowmafia.godzilla.components.RenderComponent;
@@ -21,7 +22,7 @@ package glasgowmafia.godzilla.ctrl
 
 		public function execute():void
 		{
-			var entity:Entity = _system.createEntity();
+			var entity:Entity = _system.createEntity(Names.GODZILLA);
 			
 			entity.addComponent(generateRender());
 			entity.addComponent(generatePosition());

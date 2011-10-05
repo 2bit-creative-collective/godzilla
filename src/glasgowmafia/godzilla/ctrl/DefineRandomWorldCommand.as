@@ -5,9 +5,9 @@ package glasgowmafia.godzilla.ctrl
 	import ember.core.Entity;
 	import ember.core.EntitySystem;
 
+	import glasgowmafia.godzilla.components.PhysicalComponent;
 	import glasgowmafia.godzilla.components.PositionComponent;
 	import glasgowmafia.godzilla.components.RenderComponent;
-	import glasgowmafia.godzilla.components.TargetComponent;
 
 	import flash.display.BitmapData;
 
@@ -32,7 +32,9 @@ package glasgowmafia.godzilla.ctrl
 			for (var x:int = 0; x < columns; x++)
 			{
 				for (var y:int = 0; y < rows; y++)
+				{
 					createEntity(x, y);
+				}
 			}
 		}
 
@@ -42,16 +44,20 @@ package glasgowmafia.godzilla.ctrl
 			
 			var isTarget:Boolean = _random.nextBoolean(.05);
 			if (isTarget)
-				entity.addComponent(generateTarget(x, y));
+			{
+				var physical:PhysicalComponent = generatePhysical(x, y);
+				entity.addComponent(physical);
+			}
 			
 			entity.addComponent(generateRender(x, y, isTarget ? 0xFF0000 : 0));
 			entity.addComponent(generatePosition(x, y));
 		}
 
-		private function generateTarget(x:int, y:int):TargetComponent
+		private function generatePhysical(x:int, y:int):PhysicalComponent
 		{
-			var target:TargetComponent = new TargetComponent();
-			return target;
+			var physical:PhysicalComponent = new PhysicalComponent();
+			
+			return physical;
 		}
 
 		private function generateRender(x:int, y:int, color:int = 0):RenderComponent
