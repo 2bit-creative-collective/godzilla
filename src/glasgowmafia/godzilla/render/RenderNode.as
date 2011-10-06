@@ -1,4 +1,4 @@
-package glasgowmafia.godzilla.sys.render
+package glasgowmafia.godzilla.render
 {
 	import glasgowmafia.godzilla.components.PositionComponent;
 	import glasgowmafia.godzilla.components.RenderComponent;
@@ -17,7 +17,7 @@ package glasgowmafia.godzilla.sys.render
 		[Ember(required)]
 		public var position:PositionComponent;
 		
-		[Ember(ignore)]
+//		[Ember(ignored)]
 		public var bitmap:Bitmap;
 		
 	}

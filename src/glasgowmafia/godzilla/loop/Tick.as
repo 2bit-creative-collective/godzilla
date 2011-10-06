@@ -1,4 +1,4 @@
-package glasgowmafia.godzilla
+package glasgowmafia.godzilla.loop
 {
 	import org.osflash.signals.Signal;
 

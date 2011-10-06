@@ -1,15 +1,17 @@
-package glasgowmafia.godzilla.sys.control
+package glasgowmafia.godzilla.control
 {
 	import ember.core.EntitySystem;
 	import ember.core.Nodes;
 
-	import glasgowmafia.godzilla.Tick;
 	import glasgowmafia.godzilla.components.ControlComponent;
 	import glasgowmafia.godzilla.components.PositionComponent;
+	import glasgowmafia.godzilla.loop.Tick;
 
 	import flash.display.DisplayObjectContainer;
 	import flash.display.Stage;
 	import flash.events.KeyboardEvent;
+
+
 	
 	public class KeyHandlerSystem
 	{
@@ -86,7 +88,7 @@ package glasgowmafia.godzilla.sys.control
 			var control:ControlComponent = node.control;
 				
 			var angle:Number = position.angle;
-			var changed:Boolean = false;
+			var isChanged:Boolean = false;
 			
 			if (_isLeft != _isRight)
 			{
@@ -97,30 +99,32 @@ package glasgowmafia.godzilla.sys.control
 					angle -= control.dAngle;
 			
 				position.angle = angle;
-				changed = true;
+				isChanged = true;
 			}
 			
-			var dx:Number = 0;
-			var dy:Number = 0;
 			if (_isUp != _isDown)
 			{
+				var dx:Number = 0;
+				var dy:Number = 0;
+				var velocity:Number = control.velocity;
+				
 				if (_isUp)
 				{
-					dx -= Math.sin(angle) * control.velocity;
-					dy -= Math.cos(angle) * control.velocity;
-					changed = true;
+					dx -= Math.sin(angle) * velocity;
+					dy -= Math.cos(angle) * velocity;
 				}
 				
 				if (_isDown)
 				{
-					dx += Math.sin(angle) * control.velocity;
-					dy += Math.cos(angle) * control.velocity;
-					changed = true;
+					dx += Math.sin(angle) * velocity;
+					dy += Math.cos(angle) * velocity;
 				}
 				
 				position.rect.offset(dx, dy);
-				position.changed = changed;
+				isChanged = true;
 			}
+			
+			position.changed = isChanged;
 		}
 		
 	}

@@ -1,4 +1,4 @@
-package glasgowmafia.godzilla.sys.physical
+package glasgowmafia.godzilla.physical
 {
 	import ember.core.Entity;
 

@@ -1,18 +1,15 @@
-package glasgowmafia.godzilla.sys.render
+package glasgowmafia.godzilla.render
 {
 	import ember.core.EntitySystem;
 	import ember.core.Nodes;
-
-	import glasgowmafia.godzilla.Tick;
-	import glasgowmafia.godzilla.components.PositionComponent;
-	import glasgowmafia.godzilla.components.RenderComponent;
-	import glasgowmafia.godzilla.model.Camera;
-
 	import flash.display.Bitmap;
 	import flash.display.DisplayObjectContainer;
 	import flash.display.Sprite;
 	import flash.geom.Matrix;
 	import flash.geom.Rectangle;
+	import glasgowmafia.godzilla.components.PositionComponent;
+	import glasgowmafia.godzilla.components.RenderComponent;
+	import glasgowmafia.godzilla.loop.Tick;
 	
 	public class CameraDisplayListSystem
 	{

@@ -1,9 +1,9 @@
-package glasgowmafia.godzilla.ctrl
+package glasgowmafia.godzilla.control.ctrl
 {
 	import ember.core.EntitySystem;
+	import glasgowmafia.godzilla.control.KeyHandlerSystem;
+	import glasgowmafia.godzilla.control.UpdateCameraSystem;
 
-	import glasgowmafia.godzilla.sys.control.KeyHandlerSystem;
-	import glasgowmafia.godzilla.sys.control.UpdateCameraSystem;
 	
 	public class CreateControllerSystemsCommand
 	{

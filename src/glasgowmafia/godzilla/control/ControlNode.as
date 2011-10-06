@@ -1,4 +1,4 @@
-package glasgowmafia.godzilla.sys.control
+package glasgowmafia.godzilla.control
 {
 	import glasgowmafia.godzilla.components.ControlComponent;
 	import glasgowmafia.godzilla.components.PositionComponent;

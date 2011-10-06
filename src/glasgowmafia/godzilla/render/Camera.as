@@ -1,4 +1,4 @@
-package glasgowmafia.godzilla.model
+package glasgowmafia.godzilla.render
 {
 	public class Camera
 	{

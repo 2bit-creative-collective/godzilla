@@ -1,11 +1,11 @@
-package glasgowmafia.godzilla.ctrl
+package glasgowmafia.godzilla.physical.ctrl
 {
 	import ember.core.EntitySystem;
-
-	import glasgowmafia.godzilla.sys.physical.AttackEvent;
-	import glasgowmafia.godzilla.sys.physical.PhysicalSystem;
-
+	import glasgowmafia.godzilla.physical.AttackEvent;
+	import glasgowmafia.godzilla.physical.PhysicalSystem;
 	import org.robotlegs.core.ICommandMap;
+
+
 	
 	public class CreatePhysicalSystemCommand
 	{

@@ -1,4 +1,4 @@
-package glasgowmafia.godzilla.ctrl
+package glasgowmafia.godzilla.init.ctrl
 {
 	import alecmce.random.Random;
 

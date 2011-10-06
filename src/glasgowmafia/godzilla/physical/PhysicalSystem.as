@@ -1,14 +1,14 @@
-package glasgowmafia.godzilla.sys.physical
+package glasgowmafia.godzilla.physical
 {
 	import ember.core.Entity;
 	import ember.core.EntitySystem;
 	import ember.core.Nodes;
-
-	import glasgowmafia.godzilla.Names;
-	import glasgowmafia.godzilla.Tick;
-	import glasgowmafia.godzilla.components.PositionComponent;
-
 	import flash.events.IEventDispatcher;
+	import glasgowmafia.godzilla.Names;
+	import glasgowmafia.godzilla.components.PositionComponent;
+	import glasgowmafia.godzilla.loop.Tick;
+
+
 	
 	public class PhysicalSystem
 	{

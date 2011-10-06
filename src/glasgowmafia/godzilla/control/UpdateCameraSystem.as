@@ -1,15 +1,15 @@
-package glasgowmafia.godzilla.sys.control
+package glasgowmafia.godzilla.control
 {
 	import ember.core.EntitySystem;
 	import ember.core.Nodes;
-
-	import glasgowmafia.godzilla.Tick;
-	import glasgowmafia.godzilla.components.PositionComponent;
-	import glasgowmafia.godzilla.model.Camera;
-
 	import flash.display.DisplayObjectContainer;
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
+	import glasgowmafia.godzilla.components.PositionComponent;
+	import glasgowmafia.godzilla.loop.Tick;
+	import glasgowmafia.godzilla.render.Camera;
+
+
 
 	public class UpdateCameraSystem
 	{

@@ -1,4 +1,4 @@
-package glasgowmafia.godzilla.ctrl
+package glasgowmafia.godzilla.init.ctrl
 {
 	import ember.core.Entity;
 	import ember.core.EntitySystem;
@@ -42,7 +42,7 @@ package glasgowmafia.godzilla.ctrl
 
 			var data:BitmapData = new BitmapData(40, 40, true, 0);
 			data.draw(sprite);
-
+			
 			var render:RenderComponent = new RenderComponent();
 			render.data = data;
 			render.rect = data.rect;

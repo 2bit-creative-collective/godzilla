@@ -1,18 +1,15 @@
 package glasgowmafia.godzilla
 {
 	import alecmce.random.Random;
-
 	import ember.core.EntitySystem;
-
-	import glasgowmafia.godzilla.ctrl.CreateControllerSystemsCommand;
-	import glasgowmafia.godzilla.ctrl.CreateDummyGodzillaCommand;
-	import glasgowmafia.godzilla.ctrl.CreatePhysicalSystemCommand;
-	import glasgowmafia.godzilla.ctrl.CreateViewSystemsCommand;
-	import glasgowmafia.godzilla.ctrl.DefineRandomWorldCommand;
-
-	import org.robotlegs.mvcs.Context;
-
 	import flash.display.DisplayObjectContainer;
+	import glasgowmafia.godzilla.control.ctrl.CreateControllerSystemsCommand;
+	import glasgowmafia.godzilla.init.ctrl.CreateDummyGodzillaCommand;
+	import glasgowmafia.godzilla.init.ctrl.DefineRandomWorldCommand;
+	import glasgowmafia.godzilla.loop.Tick;
+	import glasgowmafia.godzilla.physical.ctrl.CreatePhysicalSystemCommand;
+	import glasgowmafia.godzilla.render.ctrl.CreateViewSystemsCommand;
+	import org.robotlegs.mvcs.Context;
 	
 	public class GodzillaContext extends Context
 	{

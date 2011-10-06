@@ -1,10 +1,10 @@
-package glasgowmafia.godzilla.ctrl
+package glasgowmafia.godzilla.physical.ctrl
 {
 	import ember.core.Entity;
-
 	import glasgowmafia.godzilla.components.PhysicalComponent;
 	import glasgowmafia.godzilla.components.RenderComponent;
-	import glasgowmafia.godzilla.sys.physical.AttackEvent;
+	import glasgowmafia.godzilla.physical.AttackEvent;
+
 	
 	public class AttackCommand
 	{

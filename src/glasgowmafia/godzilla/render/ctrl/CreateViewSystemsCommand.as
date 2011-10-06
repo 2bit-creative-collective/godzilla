@@ -1,11 +1,11 @@
-package glasgowmafia.godzilla.ctrl
+package glasgowmafia.godzilla.render.ctrl
 {
 	import ember.core.EntitySystem;
-
-	import glasgowmafia.godzilla.model.Camera;
-	import glasgowmafia.godzilla.sys.render.CameraDisplayListSystem;
-
+	import glasgowmafia.godzilla.render.Camera;
+	import glasgowmafia.godzilla.render.CameraDisplayListSystem;
 	import org.robotlegs.core.IInjector;
+
+
 	
 	public class CreateViewSystemsCommand
 	{
