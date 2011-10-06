@@ -1,6 +1,6 @@
 package glasgowmafia.godzilla.loop.ctrl
 {
-	import ember.core.EntitySystem;
+	import ember.core.Game;
 
 	import glasgowmafia.godzilla.loop.GameLoopSignals;
 	import glasgowmafia.godzilla.loop.MainGameLoopSystem;
@@ -9,20 +9,19 @@ package glasgowmafia.godzilla.loop.ctrl
 	
 	public class CreateMainGameLoopCommand
 	{
-
-		private var _system:EntitySystem;
 		private var _injector:IInjector;
+		private var _xember:Game;
 
-		public function CreateMainGameLoopCommand(system:EntitySystem, injector:IInjector)
+		public function CreateMainGameLoopCommand(injector:IInjector, xember:Game)
 		{
-			_system = system;
 			_injector = injector;
+			_xember = xember;
 		}
 		
 		public function execute():void
 		{
 			_injector.mapSingleton(GameLoopSignals);
-			_system.addSystem(MainGameLoopSystem);
+			_xember.addSystem(MainGameLoopSystem);
 		}
 		
 	}

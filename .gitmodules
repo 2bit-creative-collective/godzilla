@@ -1,0 +1,9 @@
+[submodule "submodules/xember"]
+	path = submodules/xember
+	url = https://github.com/alecmce/xember.git
+[submodule "submodules/as3-signals"]
+	path = submodules/as3-signals
+	url = https://github.com/robertpenner/as3-signals.git
+[submodule "submodules/Starling-Framework"]
+	path = submodules/Starling-Framework
+	url = git://github.com/mnem/Starling-Framework.git

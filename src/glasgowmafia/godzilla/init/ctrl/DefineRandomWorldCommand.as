@@ -3,7 +3,7 @@ package glasgowmafia.godzilla.init.ctrl
 	import alecmce.random.Random;
 
 	import ember.core.Entity;
-	import ember.core.EntitySystem;
+	import ember.core.Game;
 
 	import glasgowmafia.godzilla.components.PhysicalComponent;
 	import glasgowmafia.godzilla.components.PositionComponent;
@@ -18,12 +18,12 @@ package glasgowmafia.godzilla.init.ctrl
 		private static const ROWS:int = 20;
 		private static const SIZE:int = 40;
 		
-		private var _system:EntitySystem;
+		private var _xember:Game;
 		private var _random:Random;
 
-		public function DefineRandomWorldCommand(system:EntitySystem, random:Random)
+		public function DefineRandomWorldCommand(xember:Game, random:Random)
 		{
-			_system = system;
+			_xember = xember;
 			_random = random;
 		}
 
@@ -40,7 +40,7 @@ package glasgowmafia.godzilla.init.ctrl
 
 		private function createEntity(x:int, y:int):void
 		{
-			var entity:Entity = _system.createEntity();
+			var entity:Entity = _xember.createEntity();
 			
 			var isTarget:Boolean = _random.nextBoolean(.05);
 			if (isTarget)

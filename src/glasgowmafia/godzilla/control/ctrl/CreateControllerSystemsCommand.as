@@ -1,6 +1,6 @@
 package glasgowmafia.godzilla.control.ctrl
 {
-	import ember.core.EntitySystem;
+	import ember.core.Game;
 
 	import glasgowmafia.godzilla.control.KeyHandlerSystem;
 	import glasgowmafia.godzilla.control.UpdateCameraSystem;
@@ -8,17 +8,17 @@ package glasgowmafia.godzilla.control.ctrl
 	
 	public class CreateControllerSystemsCommand
 	{
-		private var _system:EntitySystem;
+		private var _xember:Game;
 
-		public function CreateControllerSystemsCommand(system:EntitySystem)
+		public function CreateControllerSystemsCommand(xember:Game)
 		{
-			_system = system;
+			_xember = xember;
 		}
 		
 		public function execute():void
 		{
-			_system.addSystem(KeyHandlerSystem);
-			_system.addSystem(UpdateCameraSystem);
+			_xember.addSystem(KeyHandlerSystem);
+			_xember.addSystem(UpdateCameraSystem);
 		}
 		
 	}

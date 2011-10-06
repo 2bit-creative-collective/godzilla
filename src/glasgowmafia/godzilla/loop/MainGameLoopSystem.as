@@ -1,7 +1,5 @@
 package glasgowmafia.godzilla.loop
 {
-	import ember.core.EntitySystem;
-
 	import org.osflash.signals.Signal;
 
 	import flash.display.DisplayObjectContainer;
@@ -10,9 +8,6 @@ package glasgowmafia.godzilla.loop
 	
 	public class MainGameLoopSystem
 	{
-		
-		private var _system:EntitySystem;
-		
 		private var _root:DisplayObjectContainer;
 		private var _time:int;
 		
@@ -21,10 +16,8 @@ package glasgowmafia.godzilla.loop
 		private var _collisions:Signal;
 		private var _render:Signal;
 		
-		public function MainGameLoopSystem(system:EntitySystem, root:DisplayObjectContainer, signals:GameLoopSignals)
+		public function MainGameLoopSystem(root:DisplayObjectContainer, signals:GameLoopSignals)
 		{
-			_system = system;
-			
 			_root = root;
 			
 			_ai = signals.ai;

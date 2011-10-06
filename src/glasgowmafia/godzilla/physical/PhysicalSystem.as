@@ -1,7 +1,7 @@
 package glasgowmafia.godzilla.physical
 {
 	import ember.core.Entity;
-	import ember.core.EntitySystem;
+	import ember.core.Game;
 	import ember.core.Nodes;
 
 	import glasgowmafia.godzilla.Names;
@@ -16,7 +16,7 @@ package glasgowmafia.godzilla.physical
 
 	public class PhysicalSystem
 	{
-		private var _system:EntitySystem;
+		private var _xember:Game;
 		private var _tick:Signal;
 		private var _dispatcher:IEventDispatcher;
 		
@@ -25,18 +25,18 @@ package glasgowmafia.godzilla.physical
 		private var _godzilla:Entity;
 		private var _position:PositionComponent;
 		
-		public function PhysicalSystem(system:EntitySystem, signals:GameLoopSignals, dispatcher:IEventDispatcher)
+		public function PhysicalSystem(xember:Game, signals:GameLoopSignals, dispatcher:IEventDispatcher)
 		{
-			_system = system;
+			_xember = xember;
 			_tick = signals.collisions;
 			_dispatcher = dispatcher;
 		}
 		
 		public function onRegister():void
 		{
-			_nodes = _system.getNodes(PhysicalNode);
+			_nodes = _xember.getNodes(PhysicalNode);
 			
-			_godzilla = _system.getEntity(Names.GODZILLA);
+			_godzilla = _xember.getEntity(Names.GODZILLA);
 			_position = _godzilla.getComponent(PositionComponent) as PositionComponent;
 			
 			_tick.add(iterate);

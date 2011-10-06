@@ -1,8 +1,8 @@
 package glasgowmafia.godzilla
 {
-	import alecmce.random.Random;
+    import alecmce.random.Random;
 
-	import ember.core.EntitySystem;
+    import ember.core.Game;
 
 	import glasgowmafia.godzilla.control.ctrl.CreateControllerSystemsCommand;
 	import glasgowmafia.godzilla.init.ctrl.CreateDummyGodzillaCommand;
@@ -11,29 +11,27 @@ package glasgowmafia.godzilla
 	import glasgowmafia.godzilla.physical.ctrl.CreatePhysicalSystemCommand;
 	import glasgowmafia.godzilla.render.ctrl.CreateViewSystemsCommand;
 
-	import org.robotlegs.mvcs.Context;
+    import org.robotlegs.mvcs.Context;
 
-	import flash.display.DisplayObjectContainer;
-	
-	public class GodzillaContext extends Context
-	{
-		public function GodzillaContext(root:DisplayObjectContainer)
-		{
-			super(root, true);
-			
-			injector.mapValue(Random, new Random(4));
-			
-			injector.mapSingleton(EntitySystem);
-			
+    import flash.display.DisplayObjectContainer;
+
+    public class GodzillaContext extends Context
+    {
+        public function GodzillaContext(root:DisplayObjectContainer)
+        {
+            super(root, true);
+
+            injector.mapValue(Random, new Random(4));
+
+            injector.mapSingleton(Game);
+
 			commandMap.execute(CreateMainGameLoopCommand);
-			commandMap.execute(DefineRandomWorldCommand);
-			commandMap.execute(CreateDummyGodzillaCommand);
-			
-			commandMap.execute(CreateViewSystemsCommand);
-			commandMap.execute(CreatePhysicalSystemCommand);
-			commandMap.execute(CreateControllerSystemsCommand);
-		}
-		
-		
-	}
+            commandMap.execute(DefineRandomWorldCommand);
+            commandMap.execute(CreateDummyGodzillaCommand);
+
+            commandMap.execute(CreateViewSystemsCommand);
+            commandMap.execute(CreatePhysicalSystemCommand);
+            commandMap.execute(CreateControllerSystemsCommand);
+        }
+    }
 }
