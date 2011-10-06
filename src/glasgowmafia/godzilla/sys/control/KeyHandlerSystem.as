@@ -86,6 +86,7 @@ package glasgowmafia.godzilla.sys.control
 			var control:ControlComponent = node.control;
 				
 			var angle:Number = position.angle;
+			var changed:Boolean = false;
 			
 			if (_isLeft != _isRight)
 			{
@@ -96,24 +97,29 @@ package glasgowmafia.godzilla.sys.control
 					angle -= control.dAngle;
 			
 				position.angle = angle;
-				position.changed = true;
+				changed = true;
 			}
 			
-			if (_isUp == _isDown)
-				return;
-			
-			if (_isUp)
+			var dx:Number = 0;
+			var dy:Number = 0;
+			if (_isUp != _isDown)
 			{
-				position.x -= Math.sin(angle) * control.velocity;
-				position.y -= Math.cos(angle) * control.velocity;
-				position.changed = true;
-			}
-			
-			if (_isDown)
-			{
-				position.x += Math.sin(angle) * control.velocity;
-				position.y += Math.cos(angle) * control.velocity;
-				position.changed = true;
+				if (_isUp)
+				{
+					dx -= Math.sin(angle) * control.velocity;
+					dy -= Math.cos(angle) * control.velocity;
+					changed = true;
+				}
+				
+				if (_isDown)
+				{
+					dx += Math.sin(angle) * control.velocity;
+					dy += Math.cos(angle) * control.velocity;
+					changed = true;
+				}
+				
+				position.rect.offset(dx, dy);
+				position.changed = changed;
 			}
 		}
 		

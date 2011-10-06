@@ -10,6 +10,7 @@ package glasgowmafia.godzilla.ctrl
 
 	import flash.display.BitmapData;
 	import flash.display.Sprite;
+	import flash.geom.Rectangle;
 	
 	public class CreateDummyGodzillaCommand
 	{
@@ -54,8 +55,7 @@ package glasgowmafia.godzilla.ctrl
 		private function generatePosition():PositionComponent
 		{
 			var position:PositionComponent = new PositionComponent();
-			position.x = 500;
-			position.y = 500;
+			position.rect = new Rectangle(20, 20, 10, 10);
 			
 			return position;
 		}

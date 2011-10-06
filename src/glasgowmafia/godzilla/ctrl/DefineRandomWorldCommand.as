@@ -10,9 +10,12 @@ package glasgowmafia.godzilla.ctrl
 	import glasgowmafia.godzilla.components.RenderComponent;
 
 	import flash.display.BitmapData;
+	import flash.geom.Rectangle;
 
 	public class DefineRandomWorldCommand
 	{
+		private static const COLUMNS:int = 20;
+		private static const ROWS:int = 20;
 		private static const SIZE:int = 40;
 		
 		private var _system:EntitySystem;
@@ -26,12 +29,9 @@ package glasgowmafia.godzilla.ctrl
 
 		public function execute():void
 		{
-			var columns:uint = 50;
-			var rows:uint = 50;
-			
-			for (var x:int = 0; x < columns; x++)
+			for (var x:int = 0; x < COLUMNS; x++)
 			{
-				for (var y:int = 0; y < rows; y++)
+				for (var y:int = 0; y < ROWS; y++)
 				{
 					createEntity(x, y);
 				}
@@ -56,7 +56,7 @@ package glasgowmafia.godzilla.ctrl
 		private function generatePhysical(x:int, y:int):PhysicalComponent
 		{
 			var physical:PhysicalComponent = new PhysicalComponent();
-			
+			physical.strength = 1;
 			return physical;
 		}
 
@@ -75,10 +75,8 @@ package glasgowmafia.godzilla.ctrl
 		
 		private function generatePosition(x:int, y:int):PositionComponent
 		{
-			var position : * = new PositionComponent();
-			position.x = x * SIZE;
-			position.y = y * SIZE;
-			
+			var position:PositionComponent = new PositionComponent();
+			position.rect = new Rectangle(x * SIZE, y * SIZE, SIZE, SIZE);
 			return position;
 		}
 		

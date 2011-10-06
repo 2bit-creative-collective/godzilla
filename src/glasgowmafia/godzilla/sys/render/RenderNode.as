@@ -11,10 +11,10 @@ package glasgowmafia.godzilla.sys.render
 		public var prev:RenderNode;
 		public var next:RenderNode;
 		
-		[Ember(definesNode)]
+		[Ember(required)]
 		public var render:RenderComponent;
 		
-		[Ember(definesNode)]
+		[Ember(required)]
 		public var position:PositionComponent;
 		
 		[Ember(ignore)]

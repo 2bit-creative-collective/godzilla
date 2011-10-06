@@ -11,5 +11,7 @@ package glasgowmafia.godzilla.components
 		public var offsetX:int = 0;
 		public var offsetY:int = 0;
 		
+		public var invalidate:Boolean;
+		
 	}
 }

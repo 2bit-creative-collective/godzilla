@@ -1,23 +1,22 @@
-package glasgowmafia.godzilla.sys.target
+package glasgowmafia.godzilla.sys.physical
 {
+	import ember.core.Entity;
+
 	import glasgowmafia.godzilla.components.PhysicalComponent;
 	import glasgowmafia.godzilla.components.PositionComponent;
-	import glasgowmafia.godzilla.components.RenderComponent;
 	
 	public class PhysicalNode
 	{
+		public var entity:Entity;
 		
 		public var prev:PhysicalNode;
 		public var next:PhysicalNode;
 		
-		[Ember(definesNode)]
+		[Ember(required)]
 		public var physical:PhysicalComponent;
 		
-		[Ember(definesNode)]
+		[Ember(required)]
 		public var position:PositionComponent;
-		
-		[Ember(ignore)]
-		public var render:RenderComponent;
 		
 	}
 }

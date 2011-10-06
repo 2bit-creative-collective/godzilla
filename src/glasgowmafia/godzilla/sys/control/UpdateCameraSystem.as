@@ -9,6 +9,7 @@ package glasgowmafia.godzilla.sys.control
 
 	import flash.display.DisplayObjectContainer;
 	import flash.geom.Point;
+	import flash.geom.Rectangle;
 
 	public class UpdateCameraSystem
 	{
@@ -54,8 +55,9 @@ package glasgowmafia.godzilla.sys.control
 				dAngle = _camera.maxDAngle;
 			else if (dAngle < -_camera.maxDAngle)
 				dAngle = -_camera.maxDAngle;
-			
-			var pt:Point = new Point(_camera.x - position.x, _camera.y - position.y);
+
+			var rect:Rectangle = position.rect;
+			var pt:Point = new Point(_camera.x - rect.x, _camera.y - rect.y);
 			if (pt.length > _camera.maxDPosition)
 				pt.normalize(_camera.maxDPosition);
 			

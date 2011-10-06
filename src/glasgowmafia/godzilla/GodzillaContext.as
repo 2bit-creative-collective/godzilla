@@ -6,6 +6,7 @@ package glasgowmafia.godzilla
 
 	import glasgowmafia.godzilla.ctrl.CreateControllerSystemsCommand;
 	import glasgowmafia.godzilla.ctrl.CreateDummyGodzillaCommand;
+	import glasgowmafia.godzilla.ctrl.CreatePhysicalSystemCommand;
 	import glasgowmafia.godzilla.ctrl.CreateViewSystemsCommand;
 	import glasgowmafia.godzilla.ctrl.DefineRandomWorldCommand;
 
@@ -24,11 +25,12 @@ package glasgowmafia.godzilla
 			injector.mapSingleton(Tick);
 			injector.mapSingleton(EntitySystem);
 			
-			commandMap.execute(CreateViewSystemsCommand);
-			commandMap.execute(CreateControllerSystemsCommand);
-			
 			commandMap.execute(DefineRandomWorldCommand);
 			commandMap.execute(CreateDummyGodzillaCommand);
+			
+			commandMap.execute(CreateViewSystemsCommand);
+			commandMap.execute(CreatePhysicalSystemCommand);
+			commandMap.execute(CreateControllerSystemsCommand);
 		}
 		
 		

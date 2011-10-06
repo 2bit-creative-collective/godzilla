@@ -13,6 +13,7 @@ package glasgowmafia.godzilla.sys.render
 	import flash.display.DisplayObjectContainer;
 	import flash.geom.Matrix;
 	import flash.geom.Point;
+	import flash.geom.Rectangle;
 	
 	public class CameraBlitterSystem
 	{
@@ -77,8 +78,9 @@ package glasgowmafia.godzilla.sys.render
 				var render:RenderComponent = node.render;
 				var position:PositionComponent = node.position;
 				
-				var px:Number = position.x;
-				var py:Number = position.y;
+				var rect:Rectangle = position.rect;
+				var px:Number = rect.x;
+				var py:Number = rect.y;
 				
 				if (position.angle != 0)
 				{
@@ -90,8 +92,8 @@ package glasgowmafia.godzilla.sys.render
 				}
 				else
 				{
-					_dest.x = position.x;
-					_dest.y = position.y;
+					_dest.x = rect.x;
+					_dest.y = rect.y;
 					_interim.copyPixels(render.data, render.rect, _dest, null, null, true);
 				}
 			}

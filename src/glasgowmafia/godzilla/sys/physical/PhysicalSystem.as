@@ -1,37 +1,43 @@
-package glasgowmafia.godzilla.sys.target
+package glasgowmafia.godzilla.sys.physical
 {
 	import ember.core.Entity;
 	import ember.core.EntitySystem;
 	import ember.core.Nodes;
+
 	import glasgowmafia.godzilla.Names;
 	import glasgowmafia.godzilla.Tick;
-	import glasgowmafia.godzilla.components.PhysicalComponent;
 	import glasgowmafia.godzilla.components.PositionComponent;
-	import glasgowmafia.godzilla.components.RenderComponent;
-	import glasgowmafia.godzilla.sys.render.RenderNode;
+
+	import flash.events.IEventDispatcher;
 	
 	public class PhysicalSystem
 	{
 		private var _system:EntitySystem;
 		private var _tick:Tick;
+		private var _dispatcher:IEventDispatcher;
 		
 		private var _nodes:Nodes;
+		
 		private var _godzilla:Entity;
-
-		public function PhysicalSystem(system:EntitySystem, tick:Tick)
+		private var _position:PositionComponent;
+		
+		public function PhysicalSystem(system:EntitySystem, tick:Tick, dispatcher:IEventDispatcher)
 		{
 			_system = system;
 			_tick = tick;
+			_dispatcher = dispatcher;
 		}
 		
 		public function onRegister():void
 		{
-			_nodes = _system.getNodes(RenderNode);
+			_nodes = _system.getNodes(PhysicalNode);
+			
 			_godzilla = _system.getEntity(Names.GODZILLA);
+			_position = _godzilla.getComponent(PositionComponent) as PositionComponent;
 			
 			_tick.add(iterate);
 		}
-
+		
 		public function onRemove():void
 		{
 			_tick.remove(iterate);
@@ -41,12 +47,10 @@ package glasgowmafia.godzilla.sys.target
 		{
 			for (var node:PhysicalNode = _nodes.head as PhysicalNode; node; node = node.next)
 			{
-				var physical:PhysicalComponent = node.physical;
 				var position:PositionComponent = node.position;
-				var render:RenderComponent = node.render;
 				
-				
-					
+				if (position.rect.intersects(_position.rect))
+					_dispatcher.dispatchEvent(new AttackEvent(node.entity));
 			}
 		}
 		

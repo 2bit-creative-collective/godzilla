@@ -12,6 +12,7 @@ package glasgowmafia.godzilla.sys.render
 	import flash.display.DisplayObjectContainer;
 	import flash.display.Sprite;
 	import flash.geom.Matrix;
+	import flash.geom.Rectangle;
 	
 	public class CameraDisplayListSystem
 	{
@@ -58,17 +59,21 @@ package glasgowmafia.godzilla.sys.render
 			for (var node:RenderNode = _nodes.head as RenderNode; node; node = node.next)
 			{
 				var position:PositionComponent = node.position;
-				if (!position.changed)
+				var render:RenderComponent = node.render;
+				if (!position.changed && !render.invalidate)
 					continue;
 				
-				var render:RenderComponent = node.render;
 				var bitmap:Bitmap = node.bitmap;
+				var rect:Rectangle = position.rect;
 				
 				_matrix.identity();
 				_matrix.translate(render.offsetX, render.offsetY);
 				_matrix.rotate(-position.angle);
-				_matrix.translate(position.x - render.offsetX, position.y - render.offsetY);
+				_matrix.translate(rect.x - render.offsetX, rect.y - render.offsetY);
 				bitmap.transform.matrix = _matrix;
+				
+				position.changed = false;
+				render.invalidate = false;
 			}
 
 			_matrix.identity();
@@ -92,7 +97,7 @@ package glasgowmafia.godzilla.sys.render
 			bitmap.bitmapData = node.render.data;
 			
 			node.bitmap = bitmap;
-			node.position.changed = true;
+			node.render.invalidate = true;
 			_layer.addChild(bitmap);
 		}
 

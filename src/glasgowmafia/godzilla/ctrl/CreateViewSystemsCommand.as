@@ -36,8 +36,8 @@ package glasgowmafia.godzilla.ctrl
 			camera.maxDAngle = 1.5 * Math.PI / 180;
 			camera.maxDPosition = 5;
 			
-			camera.x = 1000;
-			camera.y = 1000;
+			camera.x = 0;
+			camera.y = 0;
 			camera.angle = 0;
 			
 			return camera;
