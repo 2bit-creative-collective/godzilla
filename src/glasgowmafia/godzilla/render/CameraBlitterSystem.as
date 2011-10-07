@@ -2,15 +2,19 @@ package glasgowmafia.godzilla.render
 {
 	import ember.core.EntitySystem;
 	import ember.core.Nodes;
+
+	import glasgowmafia.godzilla.components.PositionComponent;
+	import glasgowmafia.godzilla.components.RenderComponent;
+	import glasgowmafia.godzilla.loop.GameLoopSignals;
+
+	import org.osflash.signals.Signal;
+
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
 	import flash.display.DisplayObjectContainer;
 	import flash.geom.Matrix;
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
-	import glasgowmafia.godzilla.components.PositionComponent;
-	import glasgowmafia.godzilla.components.RenderComponent;
-	import glasgowmafia.godzilla.loop.Tick;
 
 
 	
@@ -19,7 +23,7 @@ package glasgowmafia.godzilla.render
 		private var _system:EntitySystem;
 		private var _root:DisplayObjectContainer;
 		private var _camera:Camera;
-		private var _tick:Tick;
+		private var _tick:Signal;
 		
 		private var _data:BitmapData;
 		private var _interim:BitmapData;
@@ -29,12 +33,12 @@ package glasgowmafia.godzilla.render
 
 		private var _nodes:Nodes;
 
-		public function CameraBlitterSystem(system:EntitySystem, root:DisplayObjectContainer, camera:Camera, tick:Tick)
+		public function CameraBlitterSystem(system:EntitySystem, root:DisplayObjectContainer, camera:Camera, signals:GameLoopSignals)
 		{
 			_system = system;
 			_root = root;
 			_camera = camera;
-			_tick = tick;
+			_tick = signals.render;
 			
 			_matrix = new Matrix();
 		}

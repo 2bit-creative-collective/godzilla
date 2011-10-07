@@ -1,15 +1,19 @@
 package glasgowmafia.godzilla
 {
 	import alecmce.random.Random;
+
 	import ember.core.EntitySystem;
-	import flash.display.DisplayObjectContainer;
+
 	import glasgowmafia.godzilla.control.ctrl.CreateControllerSystemsCommand;
 	import glasgowmafia.godzilla.init.ctrl.CreateDummyGodzillaCommand;
 	import glasgowmafia.godzilla.init.ctrl.DefineRandomWorldCommand;
-	import glasgowmafia.godzilla.loop.Tick;
+	import glasgowmafia.godzilla.loop.ctrl.CreateMainGameLoopCommand;
 	import glasgowmafia.godzilla.physical.ctrl.CreatePhysicalSystemCommand;
 	import glasgowmafia.godzilla.render.ctrl.CreateViewSystemsCommand;
+
 	import org.robotlegs.mvcs.Context;
+
+	import flash.display.DisplayObjectContainer;
 	
 	public class GodzillaContext extends Context
 	{
@@ -19,9 +23,9 @@ package glasgowmafia.godzilla
 			
 			injector.mapValue(Random, new Random(4));
 			
-			injector.mapSingleton(Tick);
 			injector.mapSingleton(EntitySystem);
 			
+			commandMap.execute(CreateMainGameLoopCommand);
 			commandMap.execute(DefineRandomWorldCommand);
 			commandMap.execute(CreateDummyGodzillaCommand);
 			

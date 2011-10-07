@@ -5,11 +5,15 @@ package glasgowmafia.godzilla.control
 
 	import glasgowmafia.godzilla.components.ControlComponent;
 	import glasgowmafia.godzilla.components.PositionComponent;
-	import glasgowmafia.godzilla.loop.Tick;
+	import glasgowmafia.godzilla.loop.GameLoopSignals;
+
+	import org.osflash.signals.Signal;
 
 	import flash.display.DisplayObjectContainer;
 	import flash.display.Stage;
 	import flash.events.KeyboardEvent;
+
+
 
 
 	
@@ -20,18 +24,18 @@ package glasgowmafia.godzilla.control
 		private var _stage:Stage;
 
 		private var _nodes:Nodes;
-		private var _tick:Tick;
+		private var _tick:Signal;
 		
 		private var _isLeft:Boolean;
 		private var _isUp:Boolean;
 		private var _isRight:Boolean;
 		private var _isDown:Boolean;
 
-		public function KeyHandlerSystem(system:EntitySystem, root:DisplayObjectContainer, tick:Tick)
+		public function KeyHandlerSystem(system:EntitySystem, root:DisplayObjectContainer, signals:GameLoopSignals)
 		{
 			_system = system;
 			_stage = root.stage;
-			_tick = tick;
+			_tick = signals.user;
 		}
 		
 		public function onRegister():void
@@ -80,7 +84,7 @@ package glasgowmafia.godzilla.control
 				_isDown = false;
 		}
 		
-		private function iterate():void
+		private function iterate(time:uint):void
 		{
 			var node:ControlNode = _nodes.head as ControlNode;
 			

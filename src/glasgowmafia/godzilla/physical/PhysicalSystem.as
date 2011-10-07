@@ -3,17 +3,21 @@ package glasgowmafia.godzilla.physical
 	import ember.core.Entity;
 	import ember.core.EntitySystem;
 	import ember.core.Nodes;
-	import flash.events.IEventDispatcher;
+
 	import glasgowmafia.godzilla.Names;
 	import glasgowmafia.godzilla.components.PositionComponent;
-	import glasgowmafia.godzilla.loop.Tick;
+	import glasgowmafia.godzilla.loop.GameLoopSignals;
+
+	import org.osflash.signals.Signal;
+
+	import flash.events.IEventDispatcher;
 
 
-	
+
 	public class PhysicalSystem
 	{
 		private var _system:EntitySystem;
-		private var _tick:Tick;
+		private var _tick:Signal;
 		private var _dispatcher:IEventDispatcher;
 		
 		private var _nodes:Nodes;
@@ -21,10 +25,10 @@ package glasgowmafia.godzilla.physical
 		private var _godzilla:Entity;
 		private var _position:PositionComponent;
 		
-		public function PhysicalSystem(system:EntitySystem, tick:Tick, dispatcher:IEventDispatcher)
+		public function PhysicalSystem(system:EntitySystem, signals:GameLoopSignals, dispatcher:IEventDispatcher)
 		{
 			_system = system;
-			_tick = tick;
+			_tick = signals.collisions;
 			_dispatcher = dispatcher;
 		}
 		
@@ -43,7 +47,7 @@ package glasgowmafia.godzilla.physical
 			_tick.remove(iterate);
 		}
 				
-		private function iterate():void
+		private function iterate(time:uint):void
 		{
 			for (var node:PhysicalNode = _nodes.head as PhysicalNode; node; node = node.next)
 			{

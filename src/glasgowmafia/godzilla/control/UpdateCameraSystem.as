@@ -2,14 +2,16 @@ package glasgowmafia.godzilla.control
 {
 	import ember.core.EntitySystem;
 	import ember.core.Nodes;
+
+	import glasgowmafia.godzilla.components.PositionComponent;
+	import glasgowmafia.godzilla.loop.GameLoopSignals;
+	import glasgowmafia.godzilla.render.Camera;
+
+	import org.osflash.signals.Signal;
+
 	import flash.display.DisplayObjectContainer;
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
-	import glasgowmafia.godzilla.components.PositionComponent;
-	import glasgowmafia.godzilla.loop.Tick;
-	import glasgowmafia.godzilla.render.Camera;
-
-
 
 	public class UpdateCameraSystem
 	{
@@ -20,13 +22,13 @@ package glasgowmafia.godzilla.control
 		private var _camera:Camera;
 
 		private var _nodes:Nodes;
-		private var _tick:Tick;
+		private var _tick:Signal;
 
-		public function UpdateCameraSystem(system:EntitySystem, root:DisplayObjectContainer, viewpoint:Camera, tick:Tick)
+		public function UpdateCameraSystem(system:EntitySystem, root:DisplayObjectContainer, camera:Camera, signals:GameLoopSignals)
 		{
 			_system = system;
-			_camera = viewpoint;
-			_tick = tick;
+			_camera = camera;
+			_tick = signals.render;
 		}
 		
 		public function onRegister():void
@@ -40,7 +42,7 @@ package glasgowmafia.godzilla.control
 			_tick.remove(iterate);
 		}
 		
-		private function iterate():void
+		private function iterate(time:uint):void
 		{
 			var node:ControlNode = _nodes.head as ControlNode;
 			var position:PositionComponent = node.position;
