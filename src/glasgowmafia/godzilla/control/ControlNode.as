@@ -5,6 +5,8 @@ package glasgowmafia.godzilla.control
 	
 	public class ControlNode
 	{
+		
+
 		public var prev:ControlNode;
 		public var next:ControlNode;
 		

@@ -77,6 +77,7 @@ package glasgowmafia.godzilla.init.ctrl
 		{
 			var position:PositionComponent = new PositionComponent();
 			position.rect = new Rectangle(x * SIZE, y * SIZE, SIZE, SIZE);
+			trace("rect "+position.rect.x, position.rect.y, position.rect.width, position.rect.height);
 			return position;
 		}
 		

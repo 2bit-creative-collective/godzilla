@@ -1,5 +1,6 @@
 package glasgowmafia.godzilla
 {
+    import glasgowmafia.godzilla.ctrl.CreateCollisionDetectionSystemCommand;
     import alecmce.random.Random;
 
     import ember.core.Game;
@@ -28,9 +29,9 @@ package glasgowmafia.godzilla
 			commandMap.execute(CreateMainGameLoopCommand);
             commandMap.execute(DefineRandomWorldCommand);
             commandMap.execute(CreateDummyGodzillaCommand);
-
+            commandMap.execute(CreateCollisionDetectionSystemCommand);
             commandMap.execute(CreateViewSystemsCommand);
-            commandMap.execute(CreatePhysicalSystemCommand);
+            //commandMap.execute(CreatePhysicalSystemCommand);
             commandMap.execute(CreateControllerSystemsCommand);
         }
     }
