@@ -68,10 +68,8 @@ package glasgowmafia.godzilla.render
                 var quad:Image = node.quad;
                 if (!position.changed && !render.invalidate)
                     continue;
-
                 quad.x = position.rect.x;
                 quad.y = position.rect.y;
-
                 position.changed = false;
                 render.invalidate = false;
             }

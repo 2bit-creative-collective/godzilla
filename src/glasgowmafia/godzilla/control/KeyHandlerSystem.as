@@ -15,10 +15,7 @@ package glasgowmafia.godzilla.control
 
     public class KeyHandlerSystem
     {
-        protected static const LEFT_BIT:uint = 0x01;
-        protected static const RIGHT_BIT:uint = 0x02;
-        protected static const UP_BIT:uint = 0x04;
-        protected static const DOWN_BIT:uint = 0x10;
+        
 
         protected static const LEFT_KEY:int = Keyboard.LEFT;
         protected static const RIGHT_KEY:int = Keyboard.RIGHT;
@@ -63,44 +60,47 @@ package glasgowmafia.godzilla.control
         {
             var code:uint = event.keyCode;
 
-            if(code == LEFT_KEY) _keysState |= LEFT_BIT;
-            if(code == RIGHT_KEY) _keysState |= RIGHT_BIT;
-            if(code == UP_KEY) _keysState |= UP_BIT;
-            if(code == DOWN_KEY) _keysState |= DOWN_BIT;
+            if(code == LEFT_KEY) _keysState |= ControlComponent.LEFT_BIT;
+            if(code == RIGHT_KEY) _keysState |= ControlComponent.RIGHT_BIT;
+            if(code == UP_KEY) _keysState |= ControlComponent.UP_BIT;
+            if(code == DOWN_KEY) _keysState |= ControlComponent.DOWN_BIT;
         }
 
         private function onKeyUp(event:KeyboardEvent):void
         {
             var code:uint = event.keyCode;
 
-            if(code == LEFT_KEY) _keysState &= ~LEFT_BIT;
-            if(code == RIGHT_KEY) _keysState &= ~RIGHT_BIT;
-            if(code == UP_KEY) _keysState &= ~UP_BIT;
-            if(code == DOWN_KEY) _keysState &= ~DOWN_BIT;
+            if(code == LEFT_KEY) _keysState &= ~ControlComponent.LEFT_BIT;
+            if(code == RIGHT_KEY) _keysState &= ~ControlComponent.RIGHT_BIT;
+            if(code == UP_KEY) _keysState &= ~ControlComponent.UP_BIT;
+            if(code == DOWN_KEY) _keysState &= ~ControlComponent.DOWN_BIT;
         }
 
         private function iterate(timeDelta:uint):void
         {
             var node:ControlNode = _nodes.head as ControlNode;
             var position:PositionComponent = node.position;
+            var control:ControlComponent = node.control;
             var velocity:int = 10;
+            control.direction = _keysState;
+            control.velocity = 10;
 
-            if(_keysState & LEFT_BIT)
+            if(_keysState & ControlComponent.LEFT_BIT)
             {
                 position.rect.x -= velocity;
                 position.changed = true;
             }
-            if(_keysState & RIGHT_BIT)
+            if(_keysState & ControlComponent.RIGHT_BIT)
             {
                 position.rect.x += velocity;
                 position.changed = true;
             }
-            if(_keysState & DOWN_BIT)
+            if(_keysState & ControlComponent.DOWN_BIT)
             {
                 position.rect.y += velocity;
                 position.changed = true;
             }
-            if(_keysState & UP_BIT)
+            if(_keysState & ControlComponent.UP_BIT)
             {
                 position.rect.y -= velocity;
                 position.changed = true;
@@ -116,12 +116,12 @@ package glasgowmafia.godzilla.control
             var angle:Number = position.angle;
             var changed:Boolean = false;
 
-            if (_keysState & LEFT_BIT || _keysState & RIGHT_BIT)
+            if (_keysState & ControlComponent.LEFT_BIT || _keysState & ControlComponent.RIGHT_BIT)
             {
-                if (_keysState & LEFT_BIT)
+                if (_keysState & ControlComponent.LEFT_BIT)
                     angle += control.dAngle;
 
-                if (_keysState & RIGHT_BIT)
+                if (_keysState & ControlComponent.RIGHT_BIT)
                     angle -= control.dAngle;
 
                 position.angle = angle;
@@ -130,16 +130,16 @@ package glasgowmafia.godzilla.control
 
             var dx:Number = 0;
             var dy:Number = 0;
-            if (_keysState & UP_BIT || _keysState & DOWN_BIT)
+            if (_keysState & ControlComponent.UP_BIT || _keysState & ControlComponent.DOWN_BIT)
             {
-                if (_keysState & UP_BIT)
+                if (_keysState & ControlComponent.UP_BIT)
                 {
                     dx -= Math.sin(angle) * control.velocity;
                     dy -= Math.cos(angle) * control.velocity;
                     changed = true;
                 }
 
-                if (_keysState & DOWN_BIT)
+                if (_keysState & ControlComponent.DOWN_BIT)
                 {
                     dx += Math.sin(angle) * control.velocity;
                     dy += Math.cos(angle) * control.velocity;

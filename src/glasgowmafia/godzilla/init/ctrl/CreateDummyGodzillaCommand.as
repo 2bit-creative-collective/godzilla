@@ -57,7 +57,7 @@ package glasgowmafia.godzilla.init.ctrl
 		private function generatePosition():PositionComponent
 		{
 			var position:PositionComponent = new PositionComponent();
-			position.rect = new Rectangle(20, 20, 10, 10);
+			position.rect = new Rectangle(40, 40, 40, 40);
 
 			return position;
 		}
