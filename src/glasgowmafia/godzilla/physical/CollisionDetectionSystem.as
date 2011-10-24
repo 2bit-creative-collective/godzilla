@@ -67,7 +67,6 @@ package glasgowmafia.godzilla.physical
 						((godRect.y + godRect.height - control.velocity) <= cellRect.y ))
 		            {
 		            	_position.rect.y -= inter.height;
-		            	//inter = position.rect.intersection(_position.rect);
 		            }
 
 		            if((control.direction & ControlComponent.UP_BIT) &&
@@ -79,7 +78,6 @@ package glasgowmafia.godzilla.physical
 						((godRect.y + control.velocity) >= (cellRect.y + cellRect.height)))
 		            {
 		            	_position.rect.y += inter.height;
-		            	//inter = position.rect.intersection(_position.rect);
 		            }
 		            		
 					if((control.direction & ControlComponent.LEFT_BIT) &&
@@ -91,8 +89,6 @@ package glasgowmafia.godzilla.physical
 						((godRect.x + control.velocity) >= (cellRect.x + cellRect.width)))
 		            {
 		            	_position.rect.x += inter.width;
-		            
-		            	//inter = position.rect.intersection(_position.rect);
 		            }
 
 		            
@@ -104,10 +100,7 @@ package glasgowmafia.godzilla.physical
 						((godRect.x + godRect.width - control.velocity) <= cellRect.x + cellRect.width))
 		            {
 		            	_position.rect.x -= inter.width;
-		            	//inter = position.rect.intersection(_position.rect);
 		            }
-		            
-		            		
 				}
 			}
 		}
