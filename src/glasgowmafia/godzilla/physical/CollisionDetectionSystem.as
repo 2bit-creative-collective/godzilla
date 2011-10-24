@@ -1,4 +1,4 @@
-package glasgowmafia.godzilla.sys.physical
+package glasgowmafia.godzilla.physical
 {
 	import glasgowmafia.godzilla.components.ControlComponent;
 	import flash.geom.Rectangle;
@@ -7,15 +7,16 @@ package glasgowmafia.godzilla.sys.physical
 	import ember.core.Nodes;
 
 	import glasgowmafia.godzilla.Names;
-	import glasgowmafia.godzilla.Tick;
 	import glasgowmafia.godzilla.components.PositionComponent;
+	import glasgowmafia.godzilla.loop.GameLoopSignals;
+	import org.osflash.signals.Signal;
 
 	import flash.events.IEventDispatcher;
 	
 	public class CollisionDetectionSystem
 	{
 		private var _xember:Game;
-		private var _tick:Tick;
+		private var _tick:Signal;
 		private var _dispatcher:IEventDispatcher;
 		
 		private var _nodes:Nodes;
@@ -23,10 +24,10 @@ package glasgowmafia.godzilla.sys.physical
 		private var _godzilla:Entity;
 		private var _position:PositionComponent;
 		
-		public function CollisionDetectionSystem(xember:Game, tick:Tick, dispatcher:IEventDispatcher)
+		public function CollisionDetectionSystem(xember:Game, signals:GameLoopSignals, dispatcher:IEventDispatcher)
 		{
 			_xember = xember;
-			_tick = tick;
+			_tick = signals.collisions;
 			_dispatcher = dispatcher;
 		}
 		
@@ -42,7 +43,7 @@ package glasgowmafia.godzilla.sys.physical
 			_tick.remove(iterate);
 		}
 				
-		private function iterate():void
+		private function iterate(i:uint):void
 		{
 			_godzilla = _xember.getEntity(Names.GODZILLA);
 			_position = _godzilla.getComponent(PositionComponent) as PositionComponent;

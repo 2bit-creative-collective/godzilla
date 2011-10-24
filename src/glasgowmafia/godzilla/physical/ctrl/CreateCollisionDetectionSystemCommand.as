@@ -1,10 +1,9 @@
-package glasgowmafia.godzilla.ctrl
+package glasgowmafia.godzilla.physical.ctrl
 {
-	import glasgowmafia.godzilla.sys.physical.CollisionDetectionSystem;
+	import glasgowmafia.godzilla.physical.CollisionDetectionSystem;
 	import ember.core.Game;
 
-	import glasgowmafia.godzilla.sys.physical.AttackEvent;
-	import glasgowmafia.godzilla.sys.physical.PhysicalSystem;
+	import glasgowmafia.godzilla.physical.PhysicalSystem;
 
 	import org.robotlegs.core.ICommandMap;
 	
