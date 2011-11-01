@@ -1,0 +1,10 @@
+gems:
+    - buildr-as3
+
+source_libraries:
+    - 'submodules/as3-signals/src'
+    - 'submodules/Starling-Framework/starling/src'
+    - 'submodules/xember/as3/src'
+
+swc_libraries:
+    - 'libs/robotlegs-framework-v1.4.0.swc'

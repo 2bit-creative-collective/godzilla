@@ -11,32 +11,35 @@ FLEX_SDK.from('https://s3.amazonaws.com/buildr-sdks/buildr/sdks/flex_sdk_4.5.1.2
 
 desc "The Godzilla project"
 define "godzilla", :layout => custom_layout do
-    compile.using :mxmlc,
-                  :flexsdk => FLEX_SDK,
-                  :main => _(:source, :main, :as3, 'Main.as')
-    
-    # Source libraries
-    compile.from [
-        _(:submodules, :'as3-signals', :src),
-        _(:submodules, :'Starling-Framework', :starling, :src),
-        _(:submodules, :xember, :as3, :src)
-    ]
-
-    # SWC libraries
-    compile.with [
-        _(:libs, :'robotlegs-framework-v1.4.0.swc')
-    ]
-
-    # Compile options
-    compile.options[:other] = [
+    # Work out some common paths and compile options
+    common_source_libraries = array_path_to Buildr.settings.build['source_libraries']
+    common_swc_libraries = array_path_to Buildr.settings.build['swc_libraries']
+    common_bin = path_to "bin"
+    common_other_options = [
         '-compiler.incremental=true', # Tough on compilation, tough on the causes of compilation
         '-static-link-runtime-shared-libraries=true', # Link everything
         '-optimize', # May as well optimise it
         '-swf-version=13' # New SWF version needed for Stage3D
     ]
 
-    test.compile.sources = compile.sources
+    # Setup the compiler
+    compile.using(
+        :mxmlc,
+        :flexsdk => FLEX_SDK,
+        :main => _(:source, :main, :as3, 'Main.as')).
+    from(common_source_libraries).
+    with(common_swc_libraries).
+    options[:other] = common_other_options
 
     # Output directory
     compile.into 'bin'
+
+    # Test sources
+    test.compile.sources = compile.sources
+end
+
+def array_path_to(paths)
+    expanded = []
+    paths.each { |p| expanded << path_to(p) }
+    return expanded
 end
