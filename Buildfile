@@ -19,7 +19,6 @@ define "godzilla", :layout => custom_layout do
     compile.from [
         _(:submodules, :'as3-signals', :src),
         _(:submodules, :'Starling-Framework', :starling, :src),
-        _(:submodules, :'Starling-Framework', :starling, :media),
         _(:submodules, :xember, :as3, :src)
     ]
 
@@ -35,6 +34,8 @@ define "godzilla", :layout => custom_layout do
         '-optimize', # May as well optimise it
         '-swf-version=13' # New SWF version needed for Stage3D
     ]
+
+    test.compile.sources = compile.sources
 
     # Output directory
     compile.into 'bin'
