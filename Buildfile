@@ -9,6 +9,8 @@ custom_layout[:source,:test,:as3] = "test"
 FLEX_SDK = FlexSDK.new('4.5.1.21328_AIR3')
 FLEX_SDK.from('https://s3.amazonaws.com/buildr-sdks/buildr/sdks/flex_sdk_4.5.1.21328_AIR3.zip')
 
+APPARAT_TK = ApparatToolkit.new("1.0-RC9")
+
 desc "The Godzilla project"
 define "godzilla", :layout => custom_layout do
     # Work out some common paths and compile options
@@ -29,7 +31,13 @@ define "godzilla", :layout => custom_layout do
         :main => _(:source, :main, :as3, 'Main.as')).
     from(common_source_libraries).
     with(common_swc_libraries).
-    options[:other] = common_other_options
+    options[:args] = common_other_options
+
+    compile.options[:apparat] = ApparatToolkit.new("1.0-RC9")
+    compile { 
+        apparat_tdsi :f => true, :a => true, :e => true, :m => true
+        apparat_reducer :q => 0.9, :m => true, :s => true
+    }
 
     # Output directory
     compile.into 'bin'
